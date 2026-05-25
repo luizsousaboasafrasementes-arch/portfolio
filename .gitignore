@@ -8,6 +8,7 @@ Thumbs.db
 .vercel/
 .sixth/
 .tools/
+.deploy/
 
 # Dependências e builds
 node_modules/
