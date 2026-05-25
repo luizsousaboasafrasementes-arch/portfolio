@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfólio de Projetos — Análise de Dados</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #08111f;
+        --panel: #101b2d;
+        --panel-soft: #152337;
+        --line: #2a3b52;
+        --text: #eef4f8;
+        --muted: #a8b7c7;
+        --green: #4fb477;
+        --green-dark: #153825;
+        --gold: #d8a63a;
+        --blue: #5fa8d3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at top left, rgba(79, 180, 119, 0.14), transparent 28rem),
+          linear-gradient(180deg, #08111f 0%, #0b1626 52%, #07101c 100%);
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 32px 0 48px;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+        padding: 10px 0 24px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.6rem, 3vw, 2.8rem);
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .projects {
+        display: grid;
+        gap: 22px;
+        margin-top: 26px;
+      }
+
+      .project-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: linear-gradient(180deg, rgba(16, 27, 45, 0.98), rgba(13, 23, 39, 0.98));
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+        overflow: hidden;
+      }
+
+      .project-header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 16px;
+        align-items: start;
+        padding: 22px 24px 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(1.22rem, 2vw, 1.75rem);
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      .project-type {
+        border: 1px solid rgba(216, 166, 58, 0.38);
+        border-radius: 999px;
+        color: #ffe2a2;
+        background: rgba(216, 166, 58, 0.1);
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .project-body {
+        padding: 20px 24px 24px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .block {
+        min-width: 0;
+      }
+
+      .block h3 {
+        margin: 0 0 8px;
+        color: #ffffff;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .block p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .metric {
+        border: 1px solid rgba(95, 168, 211, 0.28);
+        border-radius: 8px;
+        background: rgba(95, 168, 211, 0.08);
+        color: #d7ecf8;
+        padding: 8px 10px;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .tag {
+        border: 1px solid rgba(79, 180, 119, 0.38);
+        border-radius: 999px;
+        background: rgba(79, 180, 119, 0.1);
+        color: #c9f2d9;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .screens {
+        margin-top: 20px;
+      }
+
+      .screens h3 {
+        margin: 0 0 12px;
+        color: #ffffff;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .gallery.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      figure {
+        margin: 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel-soft);
+        overflow: hidden;
+      }
+
+      .shot {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        object-position: top left;
+        background: #0b1320;
+        cursor: pointer;
+        transition: transform 180ms ease, filter 180ms ease;
+      }
+
+      .shot:hover,
+      .shot:focus {
+        filter: brightness(1.08);
+        transform: scale(1.015);
+        outline: none;
+      }
+
+      .shot.contain {
+        object-fit: contain;
+        background: #101827;
+      }
+
+      .shot.whatsapp-crop {
+        object-fit: cover;
+        object-position: top left;
+      }
+
+      figcaption {
+        border-top: 1px solid var(--line);
+        padding: 9px 10px;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      body.lightbox-open {
+        overflow: hidden;
+      }
+
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 28px;
+        background: rgba(2, 7, 14, 0.86);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 220ms ease, visibility 220ms ease;
+      }
+
+      .lightbox.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .lightbox-frame {
+        width: min(96vw, 1400px);
+        max-height: 92vh;
+        border: 1px solid rgba(238, 244, 248, 0.18);
+        border-radius: 8px;
+        background: #07101c;
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.58);
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+        transition: opacity 220ms ease, transform 220ms ease;
+      }
+
+      .lightbox.is-open .lightbox-frame {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .lightbox-image {
+        display: block;
+        width: 100%;
+        max-height: calc(92vh - 58px);
+        object-fit: contain;
+        background: #02070e;
+      }
+
+      .lightbox-caption {
+        border-top: 1px solid rgba(238, 244, 248, 0.14);
+        padding: 12px 14px;
+        color: #d6e1eb;
+        font-size: 0.88rem;
+      }
+
+      .lightbox-close {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border: 1px solid rgba(238, 244, 248, 0.28);
+        border-radius: 999px;
+        background: rgba(8, 17, 31, 0.88);
+        color: #ffffff;
+        cursor: pointer;
+        font-size: 1.6rem;
+        line-height: 1;
+        transition: background 160ms ease, transform 160ms ease, border-color 160ms ease;
+      }
+
+      .lightbox-close:hover,
+      .lightbox-close:focus {
+        background: rgba(79, 180, 119, 0.22);
+        border-color: rgba(79, 180, 119, 0.62);
+        outline: none;
+        transform: scale(1.04);
+      }
+
+      @media (max-width: 920px) {
+        .content-grid,
+        .gallery.three {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 680px) {
+        .page {
+          width: min(100% - 20px, 1180px);
+          padding-top: 20px;
+        }
+
+        .content-grid,
+        .gallery,
+        .gallery.three,
+        .project-header {
+          grid-template-columns: 1fr;
+        }
+
+        .project-body,
+        .project-header {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .project-type {
+          width: fit-content;
+        }
+
+        .lightbox {
+          padding: 14px;
+        }
+
+        .lightbox-close {
+          top: 10px;
+          right: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <h1>Portfólio de Projetos — Análise de Dados</h1>
+      </header>
+
+      <section class="projects" aria-label="Projetos">
+        <article class="project-card">
+          <div class="project-header">
+            <h2>Automação CIF — SAP ZSD080, Excel e Power BI</h2>
+            <span class="project-type">Automação de dados operacionais</span>
+          </div>
+          <div class="project-body">
+            <div class="content-grid">
+              <div class="block">
+                <h3>Problema / objetivo</h3>
+                <p>
+                  Automatizar o fluxo de exportação do SAP ZSD080, atualizar a planilha
+                  Monitoramento CIF e alimentar o arquivo All Cultiver usado no Power BI.
+                </p>
+              </div>
+              <div class="block">
+                <h3>Como foi desenvolvido</h3>
+                <p>
+                  Script Python com SAP GUI Scripting, automação de janelas Windows, pandas e
+                  openpyxl. A lógica filtra frete CIF, IDs válidos, placas preenchidas e janela de
+                  data, normalizando colunas e preservando campos manuais.
+                </p>
+              </div>
+              <div class="block">
+                <h3>Resultado / impacto</h3>
+                <p>
+                  O log registra execuções com 20 novos pedidos e base de 6.690 registros; a
+                  planilha atual analisada contém 6.694 linhas e 24 colunas.
+                </p>
+                <div class="metrics">
+                  <span class="metric">EXPORT.XLSX: 2.479 linhas</span>
+                  <span class="metric">Monitoramento: 6.694 linhas</span>
+                  <span class="metric">Status CIF atualizados</span>
+                </div>
+              </div>
+            </div>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">OpenPyXL</span>
+              <span class="tag">SAP GUI Scripting</span>
+              <span class="tag">Excel</span>
+              <span class="tag">Power BI</span>
+              <span class="tag">Win32 COM</span>
+              <span class="tag">Batch</span>
+            </div>
+            <div class="screens">
+              <h3>Screenshots</h3>
+              <div class="gallery three">
+                <figure>
+                  <img class="shot contain" src="prints/Automação CIF 01.png" alt="Código de diagnóstico da Automação CIF aberto no editor" loading="lazy" />
+                  <figcaption>Script de diagnóstico cruzando Monitoramento CIF e EXPORT.XLSX.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot contain" src="prints/Automação CIF 02.png" alt="Menu de execução da Automação Torre de Controle" loading="lazy" />
+                  <figcaption>Menu de execução com modos para SAP, Monitoramento, All Cultiver e Power BI.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot contain" src="prints/Automação CIF 03.png" alt="Automação CIF em execução no terminal" loading="lazy" />
+                  <figcaption>Execução completa com abertura do SAP, login, ZSD080 e ajuste de data NF-e.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <h2>Automação WhatsApp — Monitoramento de Cargas</h2>
+            <span class="project-type">Painel e robô operacional</span>
+          </div>
+          <div class="project-body">
+            <div class="content-grid">
+              <div class="block">
+                <h3>Problema / objetivo</h3>
+                <p>
+                  Controlar o envio de mensagens para motoristas sem duplicidade no mesmo dia,
+                  reduzindo mensagens repetidas durante o acompanhamento de cargas.
+                </p>
+              </div>
+              <div class="block">
+                <h3>Como foi desenvolvido</h3>
+                <p>
+                  Aplicação Streamlit que lê CSV, calcula métricas, cria gráficos Plotly e usa
+                  Selenium com Chrome para abrir WhatsApp Web. A chave de controle combina motorista,
+                  ordem e data.
+                </p>
+              </div>
+              <div class="block">
+                <h3>Resultado / impacto</h3>
+                <p>
+                  O painel mostra total monitorado, enviados, pendentes e problemas. A documentação
+                  da versão 2.0 registra a regra de no máximo uma mensagem por motorista por dia.
+                </p>
+                <div class="metrics">
+                  <span class="metric">266 cargas monitoradas no print</span>
+                  <span class="metric">2.584 envios registrados no print</span>
+                  <span class="metric">0 problemas no print</span>
+                </div>
+              </div>
+            </div>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Streamlit</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">Plotly</span>
+              <span class="tag">Selenium</span>
+              <span class="tag">WhatsApp Web</span>
+              <span class="tag">CSV</span>
+              <span class="tag">Chrome WebDriver</span>
+            </div>
+            <div class="screens">
+              <h3>Screenshots</h3>
+              <div class="gallery three">
+                <figure>
+                  <img
+                    class="shot whatsapp-crop"
+                    src="prints/Automação whatsapp.png"
+                    alt="Dashboard Streamlit com métricas e gráficos de cargas"
+                    loading="lazy"
+                  />
+                  <figcaption>Dashboard Streamlit com métricas e distribuição de cargas.</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="shot contain"
+                    src="prints/Automação whatsapp codigo py.png"
+                    alt="Código Python da automação WhatsApp aberto no editor"
+                    loading="lazy"
+                  />
+                  <figcaption>Código Python com Streamlit, pandas, Plotly e Selenium.</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="shot contain"
+                    src="prints/Automação whatsapp codigo py 02.png"
+                    alt="Segundo print do código Python da automação WhatsApp"
+                    loading="lazy"
+                  />
+                  <figcaption>Continuação do código Python da automação WhatsApp.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <h2>Relatórios Power BI — KPIs, Colheita e Saldos</h2>
+            <span class="project-type">Dashboards analíticos</span>
+          </div>
+          <div class="project-body">
+            <div class="content-grid">
+              <div class="block">
+                <h3>Problema / objetivo</h3>
+                <p>
+                  Consolidar indicadores de faturamento, frete, entrega, colheita, veículos e saldo
+                  de produtores em painéis executivos e operacionais.
+                </p>
+              </div>
+              <div class="block">
+                <h3>Como foi desenvolvido</h3>
+                <p>
+                  Arquivos PBIX e planilha Excel de suporte. Os prints mostram filtros por período,
+                  unidade, carga, material, fornecedor e visuais de barras, rosca, linha e tabelas.
+                </p>
+              </div>
+              <div class="block">
+                <h3>Resultado / impacto</h3>
+                <p>
+                  Os painéis exibem 86.310 em quantidade faturada, 6.516 cargas, 99% de eficiência de
+                  entrega e 195.278,73 toneladas no print de monitoramento.
+                </p>
+                <div class="metrics">
+                  <span class="metric">3 arquivos PBIX</span>
+                  <span class="metric">Planilha 2025: 6.037 linhas</span>
+                  <span class="metric">3 screenshots Power BI</span>
+                </div>
+              </div>
+            </div>
+            <div class="tags">
+              <span class="tag">Power BI</span>
+              <span class="tag">Excel</span>
+              <span class="tag">KPI</span>
+              <span class="tag">Dashboard</span>
+              <span class="tag">Logística</span>
+              <span class="tag">Faturamento</span>
+              <span class="tag">Visualização de Dados</span>
+            </div>
+            <div class="screens">
+              <h3>Screenshots</h3>
+              <div class="gallery three">
+                <figure>
+                  <img class="shot" src="prints/Power BI 01.png" alt="Power BI com KPIs de faturamento por mercadoria e unidade" loading="lazy" />
+                  <figcaption>KPIs de faturamento por grupo de mercadoria, frete, mês e unidade.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot" src="prints/Power BI 02.png" alt="Power BI com status de cargas, eficiência e veículos" loading="lazy" />
+                  <figcaption>Monitoramento de cargas, eficiência de entrega e ocupação de veículos.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot" src="prints/Power BI 03.png" alt="Power BI com painel de gestão de saldo de produtores" loading="lazy" />
+                  <figcaption>Painel de saldo de produtores, volumes, qualidade e romaneios.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <h2>Simulador de Bonificação — Safra 2026</h2>
+            <span class="project-type">Aplicação web de cálculo</span>
+          </div>
+          <div class="project-body">
+            <div class="content-grid">
+              <div class="block">
+                <h3>Problema / objetivo</h3>
+                <p>
+                  Simular bonificações por produtor, centro, cultivar e inscrição, usando dados de
+                  entrada do ZMM113, classificações e valores de saca por praça.
+                </p>
+              </div>
+              <div class="block">
+                <h3>Como foi desenvolvido</h3>
+                <p>
+                  Backend Node.js/Express com leitura de XLSX, autenticação Supabase, sessões,
+                  upload de planilhas, regras de classificação, histórico e geração de PDF/DANFE
+                  simulado.
+                </p>
+              </div>
+              <div class="block">
+                <h3>Resultado / impacto</h3>
+                <p>
+                  A aplicação centraliza cálculo, histórico, rankings, módulos de produtores e
+                  unidades, além de relatórios PDF para conferência interna.
+                </p>
+                <div class="metrics">
+                  <span class="metric">Planilha atual: 9.717 linhas</span>
+                  <span class="metric">Classificações: 4.968 linhas</span>
+                  <span class="metric">Praças ZMM113: 9.480 linhas</span>
+                </div>
+              </div>
+            </div>
+            <div class="tags">
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
+              <span class="tag">Supabase</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">HTML</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">XLSX</span>
+              <span class="tag">PDFKit</span>
+              <span class="tag">pdf-lib</span>
+              <span class="tag">Python</span>
+            </div>
+            <div class="screens">
+              <h3>Screenshots</h3>
+              <div class="gallery three">
+                <figure>
+                  <img
+                    class="shot contain"
+                    src="prints/Simulador de Bonificação 01.png"
+                    alt="Tela inicial do Simulador de Bonificação Safra 2026"
+                    loading="lazy"
+                  />
+                  <figcaption>Tela inicial com referência de mercado, praças mapeadas e variação entre valores.</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="shot contain"
+                    src="prints/Simulador de Bonificação 02.png"
+                    alt="Formulário de dados da simulação de bonificação"
+                    loading="lazy"
+                  />
+                  <figcaption>Formulário de simulação com busca de produtores e lista de cadastros disponíveis.</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="shot contain"
+                    src="prints/Simulador de Bonificação 03.png"
+                    alt="Ranking de qualidade por produtor no Simulador de Bonificação"
+                    loading="lazy"
+                  />
+                  <figcaption>Ranking de qualidade por produtor, centro e cultivar com média geral e registros.</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="shot contain"
+                    src="prints/Simulador de Bonificação 04.png"
+                    alt="Ranking de produtores por volume no Simulador de Bonificação"
+                    loading="lazy"
+                  />
+                  <figcaption>Ranking de produtores por peso líquido, centro e participação no volume total.</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="shot contain"
+                    src="prints/Simulador de Bonificação 05.png"
+                    alt="Resumo de unidades no Simulador de Bonificação"
+                    loading="lazy"
+                  />
+                  <figcaption>Resumo de unidades com peso líquido, produtores, cultivares e visão consolidada.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <h2>Torre de Controle SAP — Vendas e Logística</h2>
+            <span class="project-type">Full-stack analytics</span>
+          </div>
+          <div class="project-body">
+            <div class="content-grid">
+              <div class="block">
+                <h3>Problema / objetivo</h3>
+                <p>
+                  Transformar o export diário SAP em uma aplicação de inteligência operacional para
+                  vendas, logística, produtos, financeiro, escritórios e mapa Brasil.
+                </p>
+              </div>
+              <div class="block">
+                <h3>Como foi desenvolvido</h3>
+                <p>
+                  Frontend React/TypeScript/Vite com Recharts e filtros globais; backend
+                  Express/TypeScript com parser XLSX, upload, SQLite e endpoints analíticos.
+                </p>
+              </div>
+              <div class="block">
+                <h3>Resultado / impacto</h3>
+                <p>
+                  A base SQLite validada contém 31.664 itens importados, 7.339 OVs distintas e 32
+                  escritórios, com funil de status operacional calculado pelo parser.
+                </p>
+                <div class="metrics">
+                  <span class="metric">Valor NF: R$ 4,49 bi</span>
+                  <span class="metric">31.664 linhas importadas</span>
+                  <span class="metric">7.339 OVs distintas</span>
+                </div>
+              </div>
+            </div>
+            <div class="tags">
+              <span class="tag">React</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Vite</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
+              <span class="tag">SQLite</span>
+              <span class="tag">SAP</span>
+              <span class="tag">XLSX</span>
+              <span class="tag">Recharts</span>
+              <span class="tag">Tailwind CSS</span>
+            </div>
+            <div class="screens">
+              <h3>Screenshots</h3>
+              <div class="gallery three">
+                <figure>
+                  <img class="shot" src="prints/Torre de controle .png" alt="Dashboard da Torre de Controle com KPIs e funil operacional" loading="lazy" />
+                  <figcaption>Dashboard com OVs, Valor NF, toneladas, bloqueios e funil de status operacional.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot" src="prints/Torre de controle 02.png" alt="Tabela de ordens de venda da Torre de Controle" loading="lazy" />
+                  <figcaption>Consulta de ordens de venda com exportação CSV/Excel e status por item.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot" src="prints/Torre de controle 03.png" alt="Página logística com pipeline e ordens logísticas" loading="lazy" />
+                  <figcaption>Pipeline logístico, filtros por status/frete e resumo de remessas.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot" src="prints/Torre de controle 04.png" alt="Ranking de escritórios na Torre de Controle" loading="lazy" />
+                  <figcaption>Visão de escritórios com ticket médio, clientes, equipes, BAG e sacarias.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot" src="prints/Torre de controle 05.png" alt="Mapa Brasil com distribuição por UF" loading="lazy" />
+                  <figcaption>Mapa Brasil e tabela por UF com OVs, Valor NF, clientes e principais cultivares.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot" src="prints/Torre de controle 06.png" alt="Análises de clientes, cultivares e estados atendidos" loading="lazy" />
+                  <figcaption>Top clientes, top cultivares, status operacional e estados atendidos.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot" src="prints/Torre de controle 07.png" alt="Página de produtos com treemap e decomposição de preço" loading="lazy" />
+                  <figcaption>Produtos com treemap de cultivares e decomposição por germoplasma, royalties, TSI e frete.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot" src="prints/Torre de controle 08.png" alt="Página financeira da Torre de Controle" loading="lazy" />
+                  <figcaption>Financeiro com Valor NF, Valor Líquido, descontos, royalties, germoplasma, TSI e frete.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <div id="screenshotLightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Screenshot ampliada">
+      <button id="lightboxClose" class="lightbox-close" type="button" aria-label="Fechar screenshot">&times;</button>
+      <figure class="lightbox-frame">
+        <img id="lightboxImage" class="lightbox-image" alt="" />
+        <figcaption id="lightboxCaption" class="lightbox-caption"></figcaption>
+      </figure>
+    </div>
+
+    <script>
+      (() => {
+        const lightbox = document.getElementById("screenshotLightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const lightboxCaption = document.getElementById("lightboxCaption");
+        const closeButton = document.getElementById("lightboxClose");
+        let lastFocusedImage = null;
+
+        function openLightbox(image) {
+          const caption = image.closest("figure")?.querySelector("figcaption")?.textContent?.trim() || image.alt || "";
+          lastFocusedImage = image;
+          lightboxImage.src = image.currentSrc || image.src;
+          lightboxImage.alt = image.alt || caption;
+          lightboxCaption.textContent = caption;
+          document.body.classList.add("lightbox-open");
+          lightbox.classList.add("is-open");
+          lightbox.setAttribute("aria-hidden", "false");
+          closeButton.focus({ preventScroll: true });
+        }
+
+        function closeLightbox() {
+          lightbox.classList.remove("is-open");
+          lightbox.setAttribute("aria-hidden", "true");
+          document.body.classList.remove("lightbox-open");
+
+          window.setTimeout(() => {
+            if (!lightbox.classList.contains("is-open")) {
+              lightboxImage.removeAttribute("src");
+              lightboxCaption.textContent = "";
+            }
+          }, 240);
+
+          if (lastFocusedImage) {
+            lastFocusedImage.focus({ preventScroll: true });
+          }
+        }
+
+        document.querySelectorAll(".shot").forEach((image) => {
+          image.setAttribute("role", "button");
+          image.setAttribute("tabindex", "0");
+          image.setAttribute("aria-label", `Abrir screenshot: ${image.alt || "imagem do projeto"}`);
+
+          image.addEventListener("click", () => openLightbox(image));
+          image.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              openLightbox(image);
+            }
+          });
+        });
+
+        closeButton.addEventListener("click", closeLightbox);
+        lightbox.addEventListener("click", (event) => {
+          if (event.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+            closeLightbox();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
