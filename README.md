@@ -4,11 +4,11 @@ Portfólio técnico em HTML, CSS e JavaScript puro, criado para apresentar proje
 
 ## Projetos Apresentados
 
+- **Torre de Controle SAP — Vendas e Logística**
+- **Relatórios Power BI — KPIs, Colheita e Saldos**
 - **Automação CIF — SAP ZSD080, Excel e Power BI**
 - **Automação WhatsApp — Monitoramento de Cargas**
-- **Relatórios Power BI — KPIs, Colheita e Saldos**
 - **Simulador de Bonificação — Safra 2026**
-- **Torre de Controle SAP — Vendas e Logística**
 
 ## Tecnologias
 
