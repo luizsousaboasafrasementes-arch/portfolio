@@ -1,0 +1,30 @@
+.git/
+.sixth/
+.vercel/
+
+Automacao CIF/
+Automatização whatsapp/
+Relatorios Power BI/
+simulador-bonificacao/
+torre-controle-sap/
+
+node_modules/
+dist/
+build/
+__pycache__/
+
+*.log
+*.sqlite
+*.sqlite-*
+*.db
+*.xlsx
+*.xls
+*.xlsm
+*.pbix
+*.pdf
+*.csv
+*.pyc
+*.pyo
+*.tsbuildinfo
+.env
+.env.*

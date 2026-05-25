@@ -1,0 +1,51 @@
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ambiente local
+.env
+.env.*
+.vercel/
+.sixth/
+
+# Dependências e builds
+node_modules/
+dist/
+build/
+
+# Logs e caches
+*.log
+__pycache__/
+*.pyc
+*.pyo
+*.tsbuildinfo
+
+# Bancos e dados locais
+*.sqlite
+*.sqlite-*
+*.db
+
+# Planilhas, PBIX e documentos de trabalho usados apenas como fonte local
+*.xlsx
+*.xls
+*.xlsm
+*.pbix
+*.pdf
+*.csv
+
+# Projetos locais usados como referência para montar o portfólio
+Automacao CIF/
+Automatização whatsapp/
+Relatorios Power BI/
+simulador-bonificacao/
+torre-controle-sap/
+
+# Mantidos no repositório público
+!index.html
+!portfolio.html
+!README.md
+!vercel.json
+!.vercelignore
+!.gitignore
+!prints/
+!prints/*.png
